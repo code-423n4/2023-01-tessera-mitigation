@@ -35,14 +35,24 @@ Each warden must submit a mitigation review for *every High and Medium finding* 
 All PRs are linked in the comments of the above-listed findings, but here is the full list of PRs for ease of reference:
 
 - https://github.com/fractional-company/modular-fractional/pull/202
+    - Addresses [12](https://github.com/code-423n4/2022-12-tessera-findings/issues/12) Updated pendingBalances mapping before setting the newly proposed listing. This way, the balance is updated for the previous proposer and the currently proposed listing can be overridden with the new one.
 - https://github.com/fractional-company/modular-fractional/pull/203
+    - Addresses [10](https://github.com/code-423n4/2022-12-tessera-findings/issues/10) Updated comparison to use <= to avoid edge case for an invalid state. 
 - https://github.com/fractional-company/modular-fractional/pull/211
+    - Addresses [43](https://github.com/code-423n4/2022-12-tessera-findings/issues/43) Solution is to move orderHash to Listing struct so that active and proposed listings can have separate order hashes.
 - https://github.com/fractional-company/modular-fractional/pull/201
+    - Addresses [47](https://github.com/code-423n4/2022-12-tessera-findings/issues/47) Fixed by moving success state update before call to market buyer
 - https://github.com/fractional-company/modular-fractional/pull/207
-- https://github.com/fractional-company/modular-fractional/pull/210
+    - Addresses [7](https://github.com/code-423n4/2022-12-tessera-findings/issues/7) Calculate actual minReservePrice after purchase has been made. This is done by simply dividing total filled quantity by the purchase price. This fixes the ETH accounting when the NFT is purchased for less than the minimum reserve price. 
+- https://github.com/fractional-company/modular-fractional/pull/212
+    - Addresses [32](https://github.com/code-423n4/2022-12-tessera-findings/issues/32) Used <= when comparing the new price to the lowest bid price. That way, it can only override the lower bid if price is higher. 
+- https://github.com/fractional-company/modular-fractional/pull/213
+    - Addresses [49](https://github.com/code-423n4/2022-12-tessera-findings/issues/49) where due to truncation, the stated minimum raised wouldn't result in actually being able to purchase with the full amount raised. Instead of doing that math we’re going to have the initial purchase by the deployer set the initial target. 
 - https://github.com/fractional-company/modular-fractional/pull/206
+    - Addresses [31](https://github.com/code-423n4/2022-12-tessera-findings/issues/31) If total supply is equal to filled quantities, use min reserved price instead of min price when validating the user contribution. this way, funds will not be stuck until a purchase is made and the user will be able to withdraw their funds right away.
 - https://github.com/fractional-company/modular-fractional/pull/204
+    - Addresss [6](https://github.com/code-423n4/2022-12-tessera-findings/issues/6) Fixed by checking success value of call
 - https://github.com/fractional-company/modular-fractional/pull/205
-- https://github.com/fractional-company/modular-fractional/pull/200
+    - Addresses [33](https://github.com/code-423n4/2022-12-tessera-findings/issues/33) Validated the NFT on pool creation to prevent funds from being locked until the termination period has passed.
 
 All wardens participating in this mitigation review have been invited to the [Tessera repo](https://github.com/fractional-company/modular-fractional/); please check your Github notifications to accept the invitation. 
